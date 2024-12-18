@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener("DOMContentLoaded", () => {
   const taskInput = document.getElementById("taskInput");
   const addTaskBtn = document.getElementById("addTaskBtn");
@@ -20,9 +19,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const taskItem = document.createElement("li");
     taskItem.className = "task-item";
 
+    // Create task description
     const taskContent = document.createElement("span");
     taskContent.textContent = taskText;
 
+    // Get the current date and time
+    const now = new Date();
+    const formattedDateTime = now.toLocaleString("en-CA", {
+      dateStyle: "short",
+      timeStyle: "short",
+    });
+
+    // Create the date and time element
+    const dateTimeSpan = document.createElement("span");
+    dateTimeSpan.className = "task-datetime";
+    dateTimeSpan.textContent = ` (Created on: ${formattedDateTime})`;
+
+    // Create Complete Button
     const completeBtn = document.createElement("button");
     completeBtn.textContent = "Complete";
     completeBtn.addEventListener("click", () => {
@@ -43,13 +56,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.addEventListener("click", () => {
-      taskList.removeChild(taskItem); // Remove task from the list
+      taskList.removeChild(taskItem);
     });
 
+    // Append elements to the task item
     taskItem.appendChild(taskContent);
+    taskItem.appendChild(dateTimeSpan); // Add date and time span
     taskItem.appendChild(completeBtn);
-    taskItem.appendChild(editBtn); // Add edit button to task item
-    taskItem.appendChild(deleteBtn); // Add delete button to task item
+    taskItem.appendChild(editBtn);
+    taskItem.appendChild(deleteBtn);
+
+    // Add the task item to the task list
     taskList.appendChild(taskItem);
   }
 });

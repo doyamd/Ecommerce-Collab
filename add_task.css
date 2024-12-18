@@ -65,8 +65,9 @@ h1 {
 
 .task-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   background: #f9f9f9;
   padding: 12px;
   border: 2px solid #ddd;
@@ -84,6 +85,11 @@ h1 {
   color: #aaa;
 }
 
+.task-item span {
+  display: block;
+  margin-bottom: 6px;
+}
+
 .task-item button {
   background: #ff5252;
   color: #fff;
@@ -96,4 +102,12 @@ h1 {
 
 .task-item button:hover {
   background: #e53935;
+}
+
+
+.task-datetime {
+  margin-left: 10px;
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
 }
