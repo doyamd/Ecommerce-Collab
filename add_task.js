@@ -29,7 +29,17 @@ document.addEventListener("DOMContentLoaded", () => {
       taskItem.classList.toggle("completed");
     });
 
-    // New: Create Delete Button
+    // Create Edit Button
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.addEventListener("click", () => {
+      const newTaskText = prompt("Edit task description:", taskContent.textContent);
+      if (newTaskText !== null && newTaskText.trim() !== "") {
+        taskContent.textContent = newTaskText.trim();
+      }
+    });
+
+    // Create Delete Button
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.addEventListener("click", () => {
@@ -38,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     taskItem.appendChild(taskContent);
     taskItem.appendChild(completeBtn);
+    taskItem.appendChild(editBtn); // Add edit button to task item
     taskItem.appendChild(deleteBtn); // Add delete button to task item
     taskList.appendChild(taskItem);
   }
