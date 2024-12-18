@@ -58,6 +58,27 @@ h1 {
   background: #45a049;
 }
 
+#filterButtons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  font-size: 1rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.filter-btn:hover {
+  background: #0056b3;
+}
+
 #taskList {
   list-style: none;
   padding: 0;
@@ -103,7 +124,6 @@ h1 {
 .task-item button:hover {
   background: #e53935;
 }
-
 
 .task-datetime {
   margin-left: 10px;

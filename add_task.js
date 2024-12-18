@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const taskInput = document.getElementById("taskInput");
   const addTaskBtn = document.getElementById("addTaskBtn");
   const taskList = document.getElementById("taskList");
+  const filterButtons = document.querySelectorAll(".filter-btn");
 
   // Function to add a task
   addTaskBtn.addEventListener("click", () => {
@@ -19,30 +20,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const taskItem = document.createElement("li");
     taskItem.className = "task-item";
 
-    // Create task description
     const taskContent = document.createElement("span");
     taskContent.textContent = taskText;
 
-    // Get the current date and time
     const now = new Date();
     const formattedDateTime = now.toLocaleString("en-CA", {
       dateStyle: "short",
       timeStyle: "short",
     });
 
-    // Create the date and time element
     const dateTimeSpan = document.createElement("span");
     dateTimeSpan.className = "task-datetime";
     dateTimeSpan.textContent = ` (Created on: ${formattedDateTime})`;
 
-    // Create Complete Button
     const completeBtn = document.createElement("button");
     completeBtn.textContent = "Complete";
     completeBtn.addEventListener("click", () => {
       taskItem.classList.toggle("completed");
+      applyFilter(currentFilter); // Reapply filter after toggling
     });
 
-    // Create Edit Button
     const editBtn = document.createElement("button");
     editBtn.textContent = "Edit";
     editBtn.addEventListener("click", () => {
@@ -52,21 +49,42 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Create Delete Button
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.addEventListener("click", () => {
       taskList.removeChild(taskItem);
+      applyFilter(currentFilter); // Reapply filter after deletion
     });
 
-    // Append elements to the task item
     taskItem.appendChild(taskContent);
-    taskItem.appendChild(dateTimeSpan); // Add date and time span
+    taskItem.appendChild(dateTimeSpan);
     taskItem.appendChild(completeBtn);
     taskItem.appendChild(editBtn);
     taskItem.appendChild(deleteBtn);
 
-    // Add the task item to the task list
     taskList.appendChild(taskItem);
+  }
+
+  let currentFilter = "all"; // Default filter
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      currentFilter = button.getAttribute("data-filter");
+      applyFilter(currentFilter);
+    });
+  });
+
+  function applyFilter(filter) {
+    const tasks = document.querySelectorAll(".task-item");
+
+    tasks.forEach((task) => {
+      if (filter === "all") {
+        task.style.display = "flex";
+      } else if (filter === "completed") {
+        task.style.display = task.classList.contains("completed") ? "flex" : "none";
+      } else if (filter === "incomplete") {
+        task.style.display = !task.classList.contains("completed") ? "flex" : "none";
+      }
+    });
   }
 });
