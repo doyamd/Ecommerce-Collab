@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To-Do List</title>
-  <link rel="stylesheet" href="add_task.css">
+  <link rel="stylesheet" href="addtask.css">
 </head>
 <body>
   <div class="todo-container">
@@ -13,10 +13,16 @@
       <input type="text" id="taskInput" placeholder="Enter a new task">
       <button id="addTaskBtn">Add Task</button>
     </div>
+    <!-- Filter Buttons -->
+    <div id="filterButtons">
+      <button class="filter-btn" data-filter="all">Show All</button>
+      <button class="filter-btn" data-filter="completed">Show Completed</button>
+      <button class="filter-btn" data-filter="incomplete">Show Incomplete</button>
+    </div>
     <ul id="taskList">
       <!-- Tasks will be added here dynamically -->
     </ul>
   </div>
-  <script src="add_task.js"></script>
+  <script src="addtask.js"></script>
 </body>
 </html>
